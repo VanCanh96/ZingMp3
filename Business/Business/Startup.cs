@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Business.Entities;
+using Business.Repository;
+using Business.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,9 +12,12 @@ namespace Business
 {
     public class Startup
     {
+        string _connectionString = "";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _connectionString = configuration.GetConnectionString("SqlConnection");
         }
 
         public IConfiguration Configuration { get; }
@@ -31,6 +32,12 @@ namespace Business
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<Mp3DbContext>(options =>
+              options.UseSqlServer(_connectionString)
+            );
+
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAccountService, AccountService>();
 
             services.AddMvc();
         }

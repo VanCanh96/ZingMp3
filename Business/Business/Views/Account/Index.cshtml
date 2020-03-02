@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form asp-controller="Account" asp-action="Login" method="post">
+    <div>
+        <p>Tên đăng nhập:</p>
+        <input type="text" name="UserName" value="" />
+    </div>
+    
+    <div>
+        <p>Mật khẩu:</p>
+        <input type="password" name="Password" value="" />
+    </div>
+    <input type="submit" value="Đăng nhập" name="submit">
+</form>
+
+<style>
+    * {
+        padding: 10px;
+    }
+</style>
