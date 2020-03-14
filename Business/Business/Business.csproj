@@ -5,8 +5,155 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Home\index.cshtml" />
+  </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="wwwroot\audio\dummy-audio.mp3" />
+    <None Include="wwwroot\css\animate.css" />
+    <None Include="wwwroot\css\bootstrap.min.css" />
+    <None Include="wwwroot\css\default-assets\audioplayer.css" />
+    <None Include="wwwroot\css\default-assets\classy-nav.css" />
+    <None Include="wwwroot\css\default-assets\hkgrotesk-fonts.css" />
+    <None Include="wwwroot\css\font-awesome.min.css" />
+    <None Include="wwwroot\css\owl.carousel.min.css" />
+    <None Include="wwwroot\fonts\classy.eot" />
+    <None Include="wwwroot\fonts\classy.svg" />
+    <None Include="wwwroot\fonts\classy.ttf" />
+    <None Include="wwwroot\fonts\classy.woff" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\fonts\HKGrotesk-Bold.eot" />
+    <None Include="wwwroot\fonts\HKGrotesk-Bold.svg" />
+    <None Include="wwwroot\fonts\HKGrotesk-Bold.ttf" />
+    <None Include="wwwroot\fonts\HKGrotesk-Bold.woff" />
+    <None Include="wwwroot\fonts\HKGrotesk-Bold.woff2" />
+    <None Include="wwwroot\fonts\HKGrotesk-BoldItalic.eot" />
+    <None Include="wwwroot\fonts\HKGrotesk-BoldItalic.svg" />
+    <None Include="wwwroot\fonts\HKGrotesk-BoldItalic.ttf" />
+    <None Include="wwwroot\fonts\HKGrotesk-BoldItalic.woff" />
+    <None Include="wwwroot\fonts\HKGrotesk-BoldItalic.woff2" />
+    <None Include="wwwroot\fonts\HKGrotesk-Italic.eot" />
+    <None Include="wwwroot\fonts\HKGrotesk-Italic.svg" />
+    <None Include="wwwroot\fonts\HKGrotesk-Italic.ttf" />
+    <None Include="wwwroot\fonts\HKGrotesk-Italic.woff" />
+    <None Include="wwwroot\fonts\HKGrotesk-Italic.woff2" />
+    <None Include="wwwroot\fonts\HKGrotesk-Medium.eot" />
+    <None Include="wwwroot\fonts\HKGrotesk-Medium.svg" />
+    <None Include="wwwroot\fonts\HKGrotesk-Medium.ttf" />
+    <None Include="wwwroot\fonts\HKGrotesk-Medium.woff" />
+    <None Include="wwwroot\fonts\HKGrotesk-Medium.woff2" />
+    <None Include="wwwroot\fonts\HKGrotesk-MediumItalic.eot" />
+    <None Include="wwwroot\fonts\HKGrotesk-MediumItalic.svg" />
+    <None Include="wwwroot\fonts\HKGrotesk-MediumItalic.ttf" />
+    <None Include="wwwroot\fonts\HKGrotesk-MediumItalic.woff" />
+    <None Include="wwwroot\fonts\HKGrotesk-MediumItalic.woff2" />
+    <None Include="wwwroot\fonts\HKGrotesk-Regular.eot" />
+    <None Include="wwwroot\fonts\HKGrotesk-Regular.svg" />
+    <None Include="wwwroot\fonts\HKGrotesk-Regular.ttf" />
+    <None Include="wwwroot\fonts\HKGrotesk-Regular.woff" />
+    <None Include="wwwroot\fonts\HKGrotesk-Regular.woff2" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBold.eot" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBold.svg" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBold.ttf" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBold.woff" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBold.woff2" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBoldItalic.eot" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBoldItalic.svg" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBoldItalic.ttf" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBoldItalic.woff" />
+    <None Include="wwwroot\fonts\HKGrotesk-SemiBoldItalic.woff2" />
+    <None Include="wwwroot\img\bg-img\1.jpg" />
+    <None Include="wwwroot\img\bg-img\10.jpg" />
+    <None Include="wwwroot\img\bg-img\11.jpg" />
+    <None Include="wwwroot\img\bg-img\12.jpg" />
+    <None Include="wwwroot\img\bg-img\13.jpg" />
+    <None Include="wwwroot\img\bg-img\14.jpg" />
+    <None Include="wwwroot\img\bg-img\15.jpg" />
+    <None Include="wwwroot\img\bg-img\16.jpg" />
+    <None Include="wwwroot\img\bg-img\17.jpg" />
+    <None Include="wwwroot\img\bg-img\18.jpg" />
+    <None Include="wwwroot\img\bg-img\19.jpg" />
+    <None Include="wwwroot\img\bg-img\2.jpg" />
+    <None Include="wwwroot\img\bg-img\20.jpg" />
+    <None Include="wwwroot\img\bg-img\21.jpg" />
+    <None Include="wwwroot\img\bg-img\22.jpg" />
+    <None Include="wwwroot\img\bg-img\23.jpg" />
+    <None Include="wwwroot\img\bg-img\24.jpg" />
+    <None Include="wwwroot\img\bg-img\25.jpg" />
+    <None Include="wwwroot\img\bg-img\26.jpg" />
+    <None Include="wwwroot\img\bg-img\27.jpg" />
+    <None Include="wwwroot\img\bg-img\3.jpg" />
+    <None Include="wwwroot\img\bg-img\4.jpg" />
+    <None Include="wwwroot\img\bg-img\5.jpg" />
+    <None Include="wwwroot\img\bg-img\6.jpg" />
+    <None Include="wwwroot\img\bg-img\7.jpg" />
+    <None Include="wwwroot\img\bg-img\8.jpg" />
+    <None Include="wwwroot\img\bg-img\9.jpg" />
+    <None Include="wwwroot\img\bg-img\banner.png" />
+    <None Include="wwwroot\img\core-img\app-store.png" />
+    <None Include="wwwroot\img\core-img\favicon.ico" />
+    <None Include="wwwroot\img\core-img\google-play.png" />
+    <None Include="wwwroot\img\core-img\logo.png" />
+    <None Include="wwwroot\img\core-img\preloader.png" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\default-assets\active.js" />
+    <None Include="wwwroot\js\default-assets\audioplayer.js" />
+    <None Include="wwwroot\js\default-assets\avoid.console.error.js" />
+    <None Include="wwwroot\js\default-assets\classynav.js" />
+    <None Include="wwwroot\js\default-assets\jquery.scrollup.min.js" />
+    <None Include="wwwroot\js\imagesloaded.pkgd.min.js" />
+    <None Include="wwwroot\js\isotope.pkgd.min.js" />
+    <None Include="wwwroot\js\jarallax-video.min.js" />
+    <None Include="wwwroot\js\jarallax.min.js" />
+    <None Include="wwwroot\js\jquery.easing.min.js" />
+    <None Include="wwwroot\js\jquery.min.js" />
+    <None Include="wwwroot\js\owl.carousel.min.js" />
+    <None Include="wwwroot\js\poca.bundle.js" />
+    <None Include="wwwroot\js\popper.min.js" />
+    <None Include="wwwroot\js\waypoints.min.js" />
+    <None Include="wwwroot\js\wow.min.js" />
+    <None Include="wwwroot\scss\mixins\_flex.scss" />
+    <None Include="wwwroot\scss\mixins\_miscellaneous.scss" />
+    <None Include="wwwroot\scss\style.scss" />
+    <None Include="wwwroot\scss\utilities\_color.scss" />
+    <None Include="wwwroot\scss\utilities\_fonts.scss" />
+    <None Include="wwwroot\scss\utilities\_responsive.scss" />
+    <None Include="wwwroot\scss\utilities\_variables.scss" />
+    <None Include="wwwroot\scss\_about.scss" />
+    <None Include="wwwroot\scss\_backtotop.scss" />
+    <None Include="wwwroot\scss\_blog.scss" />
+    <None Include="wwwroot\scss\_breadcrumb.scss" />
+    <None Include="wwwroot\scss\_buttons.scss" />
+    <None Include="wwwroot\scss\_contact.scss" />
+    <None Include="wwwroot\scss\_footer.scss" />
+    <None Include="wwwroot\scss\_guest.scss" />
+    <None Include="wwwroot\scss\_header.scss" />
+    <None Include="wwwroot\scss\_heading.scss" />
+    <None Include="wwwroot\scss\_hero.scss" />
+    <None Include="wwwroot\scss\_music.scss" />
+    <None Include="wwwroot\scss\_newsletter.scss" />
+    <None Include="wwwroot\scss\_preloader.scss" />
+    <None Include="wwwroot\scss\_reboot.scss" />
+    <None Include="wwwroot\scss\_spacing.scss" />
+    <None Include="wwwroot\scss\_widget.scss" />
+    <None Include="wwwroot\style.css" />
+    <None Include="wwwroot\style.css.map" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="FluentMigrator.Runner" Version="3.2.1" />
+    <PackageReference Include="IdentityServer4" Version="2.1.2" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.1.0" />
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
