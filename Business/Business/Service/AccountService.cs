@@ -22,12 +22,17 @@ namespace Business.Service
         {
             var entity = new Account
             {
-                UserName = model.UserName,
+                UserName = model.Username,
                 Password = model.Password
             };
 
             var account = await _accountRepository.GetByAccount(entity);
             return account != null;
+        }
+
+        public async Task<Account> GetByUsername(string username)
+        {
+            return await _accountRepository.GetByUsername(username);
         }
     }
 }

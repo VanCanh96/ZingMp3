@@ -10,10 +10,10 @@
     <title>Poca - Podcast &amp; Audio Template</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="./img/core-img/favicon.ico">
+    <link rel="icon" href="~/img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="~/style.css">
 </head>
 <body>
     <partial name="Header" />
@@ -24,25 +24,18 @@
 
     <partial name="Footer" />
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
+    @*@RenderSection("Scripts", required: false)*@
 
-    @RenderSection("Scripts", required: false)
+    @******** All JS *******
+        jQuery js*@
+    <script src="~/js/jquery.min.js"></script>
+    @*Popper js*@
+    <script src="~/js/popper.min.js"></script>
+    @*Bootstrap js*@
+    <script src="~/js/bootstrap.min.js"></script>
+    @*All js*@
+    <script src="~/js/poca.bundle.js"></script>
+    @*Active js*@
+    <script src="~/js/default-assets/active.js"></script>
 </body>
 </html>

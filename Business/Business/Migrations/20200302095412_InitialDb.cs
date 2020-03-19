@@ -100,7 +100,7 @@ namespace Business.Migrations
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "Id", "Address", "CreateAt", "CreateBy", "DateOfBirth", "GenderId", "IsActive", "Name", "Password", "UpdateAt", "UpdateBy", "UserName", "VipId" },
-                values: new object[] { 1, "Đà Nẵng", new DateTime(2020, 3, 2, 9, 54, 12, 214, DateTimeKind.Utc), 0, new DateTime(1996, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, true, "Admin", null, null, null, null, 99 });
+                values: new object[] { 1, "Đà Nẵng", new DateTime(2020, 3, 2, 9, 54, 12, 214, DateTimeKind.Utc), 0, new DateTime(1996, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, true, "Admin", "123456", null, null, "admin", 99 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_GenderId",

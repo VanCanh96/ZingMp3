@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Business.Models.Account
 {
     public class LoginModel
     {
-        public string UserName { get; set; }
+        [Required]
+        public string Username { get; set; }
+        [Required]
         public string Password { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

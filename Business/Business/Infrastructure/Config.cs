@@ -34,12 +34,13 @@ namespace Business.Infrastructure
                 // resource owner password grant client
                 new Client
                 {
-                    ClientId = "jst.ro.client",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-
+                    ClientId = "mvc",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequireConsent = false,
+                    RequirePkce = true,
                     ClientSecrets =
                     {
-                        new Secret("jst.secret".Sha256())
+                        new Secret("secret".Sha256())
                     },
                     AllowedScopes = { "jst_fe", IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile },
                     AllowOfflineAccess = true,

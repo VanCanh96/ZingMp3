@@ -6,5 +6,6 @@ namespace Business.Repository
     public interface IAccountRepository
     {
         Task<Account> GetByAccount(Account account);
+        Task<Account> GetByUsername(string username);
     }
 }

@@ -1,18 +1,15 @@
-﻿using Business.Entities;
+﻿using Business.Data.Context;
 using Business.Infrastructure;
-using Business.Repository;
-using Business.Service;
 using FluentMigrator.Runner;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Linq;
 using System.Reflection;
 
@@ -35,47 +32,81 @@ namespace Business
         {
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            //    options.CheckConsentNeeded = context => true;
+            //    options.MinimumSameSitePolicy = SameSiteMode.None;
+            //});
 
-            var builder = // configure identity server with in-memory stores, keys, clients and scopes
-                services.AddIdentityServer()
-                    // this adds the config data from DB (clients, resources)
-                    //.AddProfileService<IdentityProfileService>()
-                    //.AddResourceOwnerValidator<IdentityResourceOwnerPasswordValidator>()
-                    .AddConfigurationStore(options =>
-                    {
-                        options.ConfigureDbContext = b =>
-                            b.UseSqlServer(this.Configuration.GetConnectionString("SqlConnection"),
-                                sql => sql.MigrationsAssembly(migrationsAssembly));
-                    })
-                    // this adds the operational data from DB (codes, tokens, consents)
-                    .AddOperationalStore(options =>
-                    {
-                        options.ConfigureDbContext = b =>
-                            b.UseSqlServer(this.Configuration.GetConnectionString("SqlConnection"),
-                                sql => sql.MigrationsAssembly(migrationsAssembly));
+            //services.AddIdentityServer()
+            //    // this adds the config data from DB (clients, resources)
+            //    //.AddProfileService<IdentityProfileService>()
+            //    //.AddResourceOwnerValidator<IdentityResourceOwnerPasswordValidator>()
+            //    .AddAspNetIdentity<Account>()
 
-                        // this enables automatic token cleanup. this is optional.
-                        options.EnableTokenCleanup = true;
-                    });
+            //    .AddConfigurationStore(options =>
+            //    {
+            //        options.ConfigureDbContext = b =>
+            //            b.UseSqlServer(_connectionString,
+            //                sql => sql.MigrationsAssembly(migrationsAssembly));
+            //    })
+            //    // this adds the operational data from DB (codes, tokens, consents)
+            //    .AddOperationalStore(options =>
+            //    {
+            //        options.ConfigureDbContext = b =>
+            //            b.UseSqlServer(_connectionString,
+            //                sql => sql.MigrationsAssembly(migrationsAssembly));
 
-            services.AddDbContext<Mp3DbContext>(options =>
+            //        // this enables automatic token cleanup. this is optional.
+            //        options.EnableTokenCleanup = true;
+            //    });
+
+            //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            //services.AddAuthentication("CookieAuth")
+            //    .AddCookie("CookieAuth", config =>
+            //    {
+            //        config.Cookie.Name = "Mp3";
+            //        config.LoginPath = "/Account/Index";
+            //    });
+
+            services.AddDbContext<Mp3IdentityDbContext>(options =>
               options.UseSqlServer(_connectionString)
             );
 
-            services.AddTransient<IAccountRepository, AccountRepository>();
-            services.AddTransient<IAccountService, AccountService>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<Mp3IdentityDbContext>()
+                .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "Zingmp3";
+                config.LoginPath = "/Account/Index";
+            });
+
+            services
+                .AddFluentMigratorCore()
+                .ConfigureRunner(
+                    runner => runner
+                        .AddSqlServer()
+                        .WithGlobalConnectionString(_connectionString))
+                .AddLogging(lb => lb.AddFluentMigratorConsole());
+
+            services.AddRouting(option =>
+            {
+                option.LowercaseUrls = true;
+            });
+
+            //services.AddTransient<IAccountRepository, AccountRepository>();
+            //services.AddTransient<IAccountService, AccountService>();
+
+            services.AddControllersWithViews();
+            services.AddMvcCore().AddRazorViewEngine().AddMvcOptions(options => options.EnableEndpointRouting = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -92,18 +123,22 @@ namespace Business
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseIdentityServer();
-            app.UseAuthentication();
+            //app.UseIdentityServer();
 
-            app.UseMvc(routes =>
+            //InitializeDatabase(app);
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
             });
         }
 
-        private void InitializeDatabase(IApplicationBuilder app, IMigrationRunner runner)
+        private void InitializeDatabase(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
@@ -138,8 +173,6 @@ namespace Business
                     context.SaveChanges();
                 }
             }
-
-            runner.MigrateUp();
         }
 
     }

@@ -15,7 +15,12 @@ namespace Business.Repository
 
         public async Task<Account> GetByAccount(Account account)
         {
-            return await _context.Accounts.SingleOrDefaultAsync(x => x.UserName == account.UserName && x.Password == account.Password && x.IsActive);
+            return await _context.Accounts.FirstOrDefaultAsync(x => x.UserName == account.UserName && x.Password == account.Password && x.IsActive);
+        }
+
+        public async Task<Account> GetByUsername(string username)
+        {
+            return await _context.Accounts.FirstOrDefaultAsync(x => x.UserName == username && x.IsActive);
         }
     }
 }

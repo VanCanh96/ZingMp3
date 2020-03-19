@@ -1,26 +1,32 @@
-﻿
-@{
-    Layout = "_Layout";
-    ViewData["Title"] = "Login";
-}
+﻿@model Business.Models.Account.LoginModel
+<section class="welcome-area">
+    @*Welcome Slides*@
+    <div class="welcome-slides owl-carousel">
 
-<h2>Login</h2>
+        @*Single Welcome Slide*@
+        <div class="welcome-welcome-slide bg-img bg-overlay" style="background-image: url(../img/bg-img/1.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12" style="color: white">
+                        <h2>Login</h2>
 
-<form asp-controller="Account" asp-action="Login" method="post">
-    <div>
-        <p>Tên đăng nhập:</p>
-        <input type="text" name="UserName" value="" />
+                        <form class="form-inline" asp-action="login" method="post">
+                            <div class="form-group">
+                                <label class="control-label">Tên đăng nhập:</label>
+                                <input class="form-control" type="text" asp-for="Username" value="" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Mật khẩu:</label>
+                                <input class="form-control" type="password" asp-for="Password" value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Đăng nhập" name="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div>
-        <p>Mật khẩu:</p>
-        <input type="password" name="Password" value="" />
-    </div>
-    <input type="submit" value="Đăng nhập" name="submit">
-</form>
-
-<style>
-    * {
-        padding: 10px;
-    }
-</style>
+</section>

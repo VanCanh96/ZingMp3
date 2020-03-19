@@ -22,7 +22,7 @@ namespace Business.Entities
             // Gender
             modelBuilder.Entity<Gender>(entity =>
             {
-                entity.Property(m => m.Id).UseSqlServerIdentityColumn();
+                entity.Property(m => m.Id).UseIdentityColumn();
                 entity.Property(m => m.Name).HasMaxLength(50).IsRequired();
                 entity.Property(m => m.CreateAt).IsRequired();
                 entity.Property(m => m.CreateBy).IsRequired();
@@ -33,7 +33,7 @@ namespace Business.Entities
             // Gender
             modelBuilder.Entity<Vip>(entity =>
             {
-                entity.Property(m => m.Id).UseSqlServerIdentityColumn();
+                entity.Property(m => m.Id).UseIdentityColumn();
                 entity.Property(m => m.Name).HasMaxLength(50).IsRequired();
                 entity.Property(m => m.CreateAt).IsRequired();
                 entity.Property(m => m.CreateBy).IsRequired();
@@ -44,7 +44,7 @@ namespace Business.Entities
             // Account
             modelBuilder.Entity<Account>(entity =>
             {
-                entity.Property(m => m.Id).UseSqlServerIdentityColumn();
+                entity.Property(m => m.Id).UseIdentityColumn();
                 entity.Property(m => m.Name).HasMaxLength(50).IsRequired();
                 entity.Property(m => m.GenderId).HasMaxLength(1);
                 entity.Property(m => m.Address).HasMaxLength(500);
@@ -74,7 +74,7 @@ namespace Business.Entities
                 );
 
             modelBuilder.Entity<Account>().HasData(
-                new { Id = 1, Name = "Admin", GenderId = 1, DateOfBirth = new DateTime(1996, 12, 22), Address = "Đà Nẵng",
+                new { Id = 1, Name = "Admin", UserName = "admin", Password = "123456", GenderId = 1, DateOfBirth = new DateTime(1996, 12, 22), Address = "Đà Nẵng",
                     VipId = 99, IsActive = true, CreateAt = DateTime.UtcNow, CreateBy = 0 }
                 );
         }
