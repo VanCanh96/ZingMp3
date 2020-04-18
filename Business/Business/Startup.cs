@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
 using System.Linq;
 using System.Reflection;
 
@@ -75,9 +77,19 @@ namespace Business
               options.UseSqlServer(_connectionString)
             );
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<Mp3IdentityDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            {
+                config.Password.RequireDigit = false;
+                config.Password.RequireLowercase = false;
+                config.Password.RequireUppercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.SignIn.RequireConfirmedEmail = true;
+            })
+            .AddEntityFrameworkStores<Mp3IdentityDbContext>()
+            .AddDefaultTokenProviders();
+
+            // Add mail
+            services.AddMailKit(config => config.UseMailKit(Configuration.GetSection("Email").Get<MailKitOptions>()));
 
             services.ConfigureApplicationCookie(config =>
             {
